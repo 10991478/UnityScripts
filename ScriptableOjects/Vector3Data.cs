@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class Vector3Data : ScriptableObject
 {
     [SerializeField] private Vector3 value;
-    [SerializeField] private bool xMax, xmin, yMax, yMin, zMax, zMin;
+    [SerializeField] private bool hasXMax, hasXMin, hasYMax, hasYMin, hasZMax, hasZMin;
 
     [SerializeField] private float xMax, xMin, yMax, yMin, zMax, zMin;
 
