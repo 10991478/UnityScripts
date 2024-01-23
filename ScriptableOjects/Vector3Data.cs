@@ -27,13 +27,13 @@ public class Vector3Data : ScriptableObject
     public Vector3 evaluateLimits(){
         Vector3 temp = new Vector3(0,0,0);
         if (value.x > xMax || value.x < xMin){
-            Vector3.x = 1;
+            temp.x = 1;
         }
         if (value.y > yMax || value.y < yMin){
-            Vector3.y = 1;
+            temp.y = 1;
         }
         if (value.z > zMax || value.z < zMin){
-            Vector3.z = 1;
+            temp.z = 1;
         }
 
         return temp;
