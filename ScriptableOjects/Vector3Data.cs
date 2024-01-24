@@ -10,35 +10,87 @@ public class Vector3Data : ScriptableObject
 
     public UnityEvent updateValueEvent, atOrBelowMinEvent, atOrAboveMaxEvent;
 
-    public Vector3 getValue(){
+    public Vector3 GetValue(){
         return value;
     }
 
-    public void setValue(Vector3 newVal){
+    public void SetValue(Vector3 newVal){
         value = newVal;
         updateValueEvent.Invoke();
     }
 
-    public void addValue(Vector3 addVal){
+    public void AddValue(Vector3 addVal){
         value += addVal;
         updateValueEvent.Invoke();
     }
 
-    public Vector3 evaluateLimits(){
+    public Vector3 EvaluateLimits(){
         Vector3 temp = new Vector3(0,0,0);
-        if (value.x > xMax || value.x < xMin){
+        if (value.x > xMax)
+        {
             temp.x = 1;
         }
-        if (value.y > yMax || value.y < yMin){
+        else if (value.x < xMin)
+        {
+            temp.x = -1;
+        }
+        if (value.y > yMax)
+        {
             temp.y = 1;
         }
-        if (value.z > zMax || value.z < zMin){
+        else if (value.y < yMin)
+        {
+            temp.y = -1;
+        }
+        if (value.z > zMax)
+        {
             temp.z = 1;
+        }
+        else if (value.z < zMin)
+        {
+            temp.z = -1;
         }
 
         return temp;
     }
 
-
-
+    public void HandleLimits()
+    {
+        if (value.x > xMax && hasXMax)
+        {
+            value.x = xMax;
+            updateValueEvent.Invoke();
+            atOrAboveMaxEvent.Invoke();
+        }
+        else if (value.x < xMin && hasXMin)
+        {
+            value.x = xMin;
+            updateValueEvent.Invoke();
+            atOrBelowMinEvent.Invoke();
+        }
+        if (value.y > yMax && hasYMax)
+        {
+            value.y = yMax;
+            updateValueEvent.Invoke();
+            atOrAboveMaxEvent.Invoke();
+        }
+        else if (value.y < yMin && hasYMin)
+        {
+            value.y = yMin;
+            updateValueEvent.Invoke();
+            atOrBelowMinEvent.Invoke();
+        }
+        if (value.z > zMax && hasZMax)
+        {
+            value.z = zMax;
+            updateValueEvent.Invoke();
+            atOrAboveMaxEvent.Invoke();
+        }
+        else if (value.z < zMin && hasZMin)
+        {
+            value.z = zMin;
+            updateValueEvent.Invoke();
+            atOrBelowMinEvent.Invoke();
+        }
+    }
 }
