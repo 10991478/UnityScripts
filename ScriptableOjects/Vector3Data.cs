@@ -26,27 +26,27 @@ public class Vector3Data : ScriptableObject
 
     public Vector3 EvaluateLimits(){
         Vector3 temp = new Vector3(0,0,0);
-        if (value.x > xMax)
+        if (value.x > xMax && hasXMax)
         {
             temp.x = 1;
         }
-        else if (value.x < xMin)
+        else if (value.x < xMin && hasXMin)
         {
             temp.x = -1;
         }
-        if (value.y > yMax)
+        if (value.y > yMax && hasYMax)
         {
             temp.y = 1;
         }
-        else if (value.y < yMin)
+        else if (value.y < yMin && hasYMin)
         {
             temp.y = -1;
         }
-        if (value.z > zMax)
+        if (value.z > zMax && hasZMax)
         {
             temp.z = 1;
         }
-        else if (value.z < zMin)
+        else if (value.z < zMin && hasZMin)
         {
             temp.z = -1;
         }
