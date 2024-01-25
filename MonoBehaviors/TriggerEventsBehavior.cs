@@ -3,8 +3,12 @@ using UnityEngine.Events;
 
 public class TriggerEventsBehavior : MonoBehaviour
 {
-    [SerializeField] private UnityEvent triggerEvent;
+    [SerializeField] private UnityEvent triggerEnterEvent, triggerExitEvent;
     private void OnTriggerEnter(Collider other) {
-        triggerEvent.Invoke();
+        triggerEnterEvent.Invoke();
+    }
+
+    private void OnTriggerExit(Collider other) {
+        triggerExitEvent.Invoke();
     }
 }

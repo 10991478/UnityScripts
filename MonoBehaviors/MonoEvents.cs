@@ -4,7 +4,8 @@ using UnityEngine.Events;
 
 public class MonoEvents : MonoBehaviour
 {
-    [SerializeField] private UnityEvent awakeEvent, startEvent, onEnableEvent;
+    [SerializeField] private UnityEvent awakeEvent, startEvent,
+    onEnableEvent, onDestoryEvent, onDisableEvent;
     [SerializeField] private float holdTime;
     
 
@@ -21,5 +22,13 @@ public class MonoEvents : MonoBehaviour
 
     private void OnEnable() {
         onEnableEvent.Invoke();
+    }
+
+    private void OnDisable() {
+        onDisableEvent.Invoke();
+    }
+
+    private void OnDestroy() {
+        onDestoryEvent.Invoke();
     }
 }
