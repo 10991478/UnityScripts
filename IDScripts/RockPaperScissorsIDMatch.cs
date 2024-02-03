@@ -7,14 +7,32 @@ public class RockPaperScissorsIDMatch : MonoBehaviour
 
     [SerializeField] private UnityEvent IDMatchEvent, IDLoseEvent, IDWinEvent;
     private void OnTriggerEnter(Collider other) {
-        if(other.GetComponent<IDContainer>().id == selfID){
-            IDMatchEvent.Invoke();
+        var tempObj = other.GetComponent<IDContainer>();
+        if (tempObj == null) return;
+        else {
+            if(tempObj.id == selfID){
+                IDMatchEvent.Invoke();
+            }
+            else if(tempObj.id == downID){
+                IDWinEvent.Invoke();
+            }
+            else if(tempObj.id == upID){
+                IDLoseEvent.Invoke();
+            }
         }
-        else if(other.GetComponent<IDContainer>().id == downID){
-            IDWinEvent.Invoke();
+        
+    }
+
+
+    public void TempMethod(int num){
+        if (num == -1){
+            Debug.Log("lost");
         }
-        else if(other.GetComponent<IDContainer>().id == upID){
-            IDLoseEvent.Invoke();
+        if (num == 0){
+            Debug.Log("same");
+        }
+        if (num == 1){
+            Debug.Log("won");
         }
     }
 }
