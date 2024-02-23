@@ -9,7 +9,7 @@ public class IntData : ScriptableObject
     public int lowerBound;
     public int upperBound;
 
-    public UnityEvent updateValueEvent, updateMaxEvent, updateMinEvent, atOrBelowMinEvent, atOrAboveMaxEvent;
+    public UnityEvent updateValueEvent, updateMaxEvent, updateMinEvent, atMinEvent, atMaxEvent, belowMinEvent, aboveMaxEvent;
 
     public void SetValue(int newVal){
         value = newVal;
@@ -19,13 +19,16 @@ public class IntData : ScriptableObject
     public void AddValue(int addVal){
         value += addVal;
         updateValueEvent.Invoke();
-
-        if (hasLowerBound && value <= lowerBound) atOrBelowMinEvent.Invoke();
-        if (hasUpperBound && value >= upperBound) atOrAboveMaxEvent.Invoke();
     }
 
     public void IncrementValue(){
-        AddValue(1);
+        value++;
+        updateValueEvent.Invoke();
+    }
+
+    public void DecrementtValue()
+    {
+        value--;
         updateValueEvent.Invoke();
     }
 
@@ -63,5 +66,13 @@ public class IntData : ScriptableObject
     {
         lowerBound += val;
         updateMinEvent.Invoke();
+    }
+
+    public void CheckBounds()
+    {
+        if (hasLowerBound && value == lowerBound) atMinEvent.Invoke();
+        else if (hasLowerBound && value < lowerBound) belowMinEvent.Invoke();
+        else if (hasUpperBound && value == upperBound) atMaxEvent.Invoke();
+        else if (hasUpperBound && value > upperBound) aboveMaxEvent.Invoke();
     }
 }
