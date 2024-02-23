@@ -21,7 +21,7 @@ public class GeneralEnemyMethods : MonoBehaviour
 
     public void AddToIntHealth(int num)
     {
-        intScore.AddValue((int)(damageMultiplier.value*num));
+        intHealth.AddValue((int)(damageMultiplier.value*num));
     }
 
     public void AddToFloatScore(float num)
