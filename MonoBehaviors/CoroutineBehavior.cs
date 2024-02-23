@@ -30,7 +30,7 @@ public class CoroutineBehavior : MonoBehaviour
         {
             yield return wfsObj;
             repeatCountEvent.Invoke();
-            counterNum.addValue(-1);
+            counterNum.AddValue(-1);
         }
         yield return wfsObj;
         endCountEvent.Invoke();

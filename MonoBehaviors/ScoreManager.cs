@@ -4,6 +4,6 @@ public class ScoreManager : MonoBehaviour
 {
     public IntData score;
     public void AddToScore(int value){
-        score.addValue(value);
+        score.AddValue(value);
     }
 }
