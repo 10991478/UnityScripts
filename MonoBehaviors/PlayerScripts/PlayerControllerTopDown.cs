@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerControllerTopDown : MonoBehaviour
 {
-    private Rigidbody rb;
-
     private float horizontalInput, verticalInput;
     [SerializeField] private float speed;
     [SerializeField] private FloatData speedMultiplier, shotCooldown;
@@ -14,11 +12,11 @@ public class PlayerControllerTopDown : MonoBehaviour
     private float timeSinceLastShot, shootingDirection = 0;
     private int currentAmmoType = 0;
     [SerializeField] private GameObject[] ammoObjects;
+    private Vector3 targetPosition;
 
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
         timeSinceLastShot = Time.time;
     }
 
@@ -47,22 +45,11 @@ public class PlayerControllerTopDown : MonoBehaviour
             horizontalInput = 1;
         }
 
-        if (horizontalInput != 0)
-        {
-            rb.velocity = new Vector3(horizontalInput * speed * speedMultiplier.value * travelState, rb.velocity.y, rb.velocity.z);
-        }
-        else
-        {
-            rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
-        }
-        if (verticalInput != 0)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, verticalInput * speed * speedMultiplier.value * travelState);
-        }
-        else
-        {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
-        }
+        targetPosition = transform.position;
+        targetPosition.x += horizontalInput * speed * speedMultiplier.value * Time.deltaTime;
+        targetPosition.z += verticalInput * speed * speedMultiplier.value * Time.deltaTime;
+
+        transform.position = targetPosition;
 
 
 
