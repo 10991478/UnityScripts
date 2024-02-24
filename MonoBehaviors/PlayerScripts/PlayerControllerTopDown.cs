@@ -8,6 +8,7 @@ public class PlayerControllerTopDown : MonoBehaviour
     private float horizontalInput, verticalInput;
     [SerializeField] private float speed;
     [SerializeField] private FloatData speedMultiplier;
+    [SerializeField] private Vector3Data spawnPoint;
     private Vector3 targetPosition;
 
     void Update()
@@ -40,5 +41,10 @@ public class PlayerControllerTopDown : MonoBehaviour
         targetPosition.z += verticalInput * speed * speedMultiplier.value * Time.deltaTime;
 
         transform.position = targetPosition;
+    }
+
+    public void GoToSpawnPoint()
+    {
+        transform.position = spawnPoint.GetValue();
     }
 }
