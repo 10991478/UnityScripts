@@ -11,18 +11,42 @@
 
 
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class QUICK_TESTER_SCRIPT : MonoBehaviour
 {
-    [SerializeField] private UnityEvent pressSpaceEvent;
+    [SerializeField] private UnityEvent pressSpaceEvent, timerEvent;
     [SerializeField] private CoordinateArray playerJumpCoordinates;
+    [SerializeField] private float seconds;
+    private WaitForSeconds wfsObj;
+
+    private void Awake()
+    {
+        wfsObj = new WaitForSeconds(seconds);
+    }
+
+    private void Start()
+    {
+        StartCoroutine(TimerFunction());
+    }
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space)){
-            playerJumpCoordinates.SetNewCoordinate(transform.position);
-            pressSpaceEvent.Invoke();
+
+    }
+
+    private IEnumerator TimerFunction()
+    {
+        while (true)
+        {
+            yield return wfsObj;
+            timerEvent.Invoke();
         }
+    }
+
+    public void PrintMethod(string str)
+    {
+        Debug.Log(str);
     }
 }

@@ -9,46 +9,71 @@ public class FloatData : ScriptableObject
     public float lowerBound; //lower limit for value if hasLowerBound is true
     public float upperBound; //upper limit for value if hasUpperBound is true
 
-    public UnityEvent updateValueEvent;
+    public UnityEvent updateValueEvent, atOrBelowMinEvent, atOrAboveMaxEvent, updateMaxEvent, updateMinEvent;
 
-    public void setValue(float newVal){
+    public void SetValue(float newVal){
         value = newVal;
         updateValueEvent.Invoke();
     }
 
-    //addValue() adds to value
-    /*WHEN ADDING:
-        1: If not constrained, add to value
-        2: If constrained:
-            a: If added value would exceed either upper or lower bound, set value to exceeded bound
-            b: If doesn't exceed bounds, add to value*/
-    public void addValue(float addVal){
-        if (hasLowerBound || hasLowerBound)
+    public void RoundValueToPlaces(int places)
+    {
+        for (int i = 0; i < places; i++)
         {
-            if (hasUpperBound)
-            {
-                if (value + addVal > upperBound)
-                {
-                    value = upperBound;
-                }
-                else
-                {
-                    value += addVal;
-                }
-            }
-            if (hasLowerBound){
-                if (value + addVal < lowerBound)
-                {
-                    value = lowerBound;
-                }
-                else
-                {
-                    value += addVal;
-                }
-            }
+            value *= 10;
         }
-        else{
-            value += addVal;
+
+        value = (int)value;
+
+        for (int i = 0; i < places; i++)
+        {
+            value /= 10;
         }
+
+        updateValueEvent.Invoke();
+    }
+    
+    public void AddValue(float addVal){
+        value += addVal;
+        updateValueEvent.Invoke();
+
+        if (value <= lowerBound && hasLowerBound) atOrBelowMinEvent.Invoke();
+        else if (value >= upperBound && hasUpperBound) atOrAboveMaxEvent.Invoke();
+    }
+
+    public void SetToMax()
+    {
+        value = upperBound;
+        updateValueEvent.Invoke();
+    }
+
+    public void SetToMin()
+    {
+        value = lowerBound;
+        updateValueEvent.Invoke();
+    }
+
+    public void SetMaxValue(float val)
+    {
+        upperBound = val;
+        updateMaxEvent.Invoke();
+    }
+
+    public void SetMinValue(float val)
+    {
+        lowerBound = val;
+        updateMinEvent.Invoke();
+    }
+
+    public void AddMaxValue(float val)
+    {
+        upperBound += val;
+        updateMaxEvent.Invoke();
+    }
+
+    public void AddMinValue(float val)
+    {
+        lowerBound += val;
+        updateMinEvent.Invoke();
     }
 }
