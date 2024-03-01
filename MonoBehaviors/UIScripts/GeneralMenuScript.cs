@@ -25,4 +25,12 @@ public class GeneralMenuScript : MonoBehaviour
         SceneManager.LoadScene(scoreboardSceneNum); // scene to load
         Debug.Log("Scoreboard loaded");
     }
+
+    public void LoadSceneByIndex(int index){
+        SceneManager.LoadScene(index);
+    }
+
+    public void LoadNextScene(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }
