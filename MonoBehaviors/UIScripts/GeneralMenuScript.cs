@@ -1,7 +1,7 @@
+//this script has functions for switching to scoreboard and level01 scenes and also for quitting the game
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//this script has functions for switching to scoreboard and level01 scenes and also for quitting the game
 public class GeneralMenuScript : MonoBehaviour
 {
     public int level01SceneNum;
