@@ -41,7 +41,7 @@ public class GeneralEnemyMethods : MonoBehaviour
     public void DropPickupRandom(){
         if (rand.NextDouble() <= pickupDropChance.value){
             int randInt = rand.Next(pickupDropList.Length);
-            Instantiate(pickupDropList[randInt], transform.position, transform.rotation);
+            Instantiate(pickupDropList[randInt], transform.position, new Quaternion(0,0,0,0));
         }
     }
 }
