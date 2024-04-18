@@ -23,6 +23,11 @@ public class GeneralEnemyMethods : MonoBehaviour
         intScore.AddValue((int)(scoreMultiplier.value*num));
     }
 
+    public void AddToIntScoreNoMultiplier(int num)
+    {
+        intScore.AddValue(num);
+    }
+
     public void AddToIntHealth(int num)
     {
         intHealth.AddValue((int)(damageMultiplier.value*num));
