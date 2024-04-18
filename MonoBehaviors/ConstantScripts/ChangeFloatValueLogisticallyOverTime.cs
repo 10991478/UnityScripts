@@ -9,15 +9,26 @@ public class ChangeFloatValueLogisticallyOverTime : MonoBehaviour
 {
     [SerializeField] private FloatData floatValue;
     [SerializeField] private float range, curveSteepness, timeOffset, rangeOffset;
+    private float currentTimeOffset = 0f;
 
     void Update()
     {
-        floatValue.SetValue(LogisticFunction((float)Time.time));
+        floatValue.SetValue(LogisticFunction((float)Time.time - currentTimeOffset));
     }
 
 
     float LogisticFunction(float x)
     {
         return (range / (1 + Mathf.Exp(-curveSteepness * (x - timeOffset))) + rangeOffset);
+    }
+
+    public void SetCurrentTimeOffset(float val)
+    {
+        currentTimeOffset = val;
+    }
+
+    public void SetCurrentTimeOffset()
+    {
+        currentTimeOffset = (float)Time.time;
     }
 }

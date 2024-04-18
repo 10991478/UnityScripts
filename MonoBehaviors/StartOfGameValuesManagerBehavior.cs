@@ -23,4 +23,9 @@ public class StartOfGameValuesManagerBehavior : MonoBehaviour
     {
         applicationQuitEvent.Invoke();
     }
+
+    public void DebugLog(string str)
+    {
+        Debug.Log(str);
+    }
 }
