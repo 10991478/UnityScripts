@@ -10,13 +10,6 @@ public class SpawnRandomWithinZones : MonoBehaviour
     [SerializeField] private bool relativeToSelf;
     [SerializeField] private Vector3 relativeOffset;
 
-    private WaitForSeconds waitForSecondsObj;
-
-    private void Awake()
-    {
-        waitForSecondsObj = new WaitForSeconds(timeBetweenSpawns.value);
-    }
-
     private void Start()
     {
         StartSpawning();
@@ -24,9 +17,10 @@ public class SpawnRandomWithinZones : MonoBehaviour
 
     private IEnumerator Spawn()
     {
-        while (continueSpawning.value)
+        while (continueSpawning.value == true)
         {
-            yield return waitForSecondsObj;
+            Debug.Log("Wait time: " + timeBetweenSpawns.value);
+            yield return new WaitForSeconds(timeBetweenSpawns.value);
             int num = Random.Range(0, spawnZones.Length);
             Vector3 chosenZone = spawnZones[num].GetZone();
             Vector3 chosenOffset = spawnZones[num].GetOffset();
