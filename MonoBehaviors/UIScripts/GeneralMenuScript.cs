@@ -33,4 +33,9 @@ public class GeneralMenuScript : MonoBehaviour
     public void LoadNextScene(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void SetCursorVisibility(bool isVisible)
+    {
+        Cursor.visible = isVisible;
+    }
 }
