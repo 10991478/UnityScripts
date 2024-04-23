@@ -36,7 +36,7 @@ public class PlayerControllerTopDown : MonoBehaviour
             horizontalInput = 1;
         }
 
-        rb.velocity = new Vector3(horizontalInput * speed * speedMultiplier.value, 0, verticalInput * speed * speedMultiplier.value);
+        rb.velocity = Vector3.Normalize(new Vector3(horizontalInput, 0, verticalInput))*speed*speedMultiplier.value;
     }
 
     public void GoToSpawnPoint()
