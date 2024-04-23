@@ -23,7 +23,8 @@ public class FloatingPetFollowTargetBehavior : MonoBehaviour
         {
             towardsVector *= speedModifierWithinFollowDistance;
         }
+        towardsVector *= 1f + distance*(distanceSpeedModifier*0.01f);
         Vector3 velocityVector = new Vector3(Mathf.Lerp(rb.velocity.x, towardsVector.x, accuracy.value), 0, Mathf.Lerp(rb.velocity.z, towardsVector.z, accuracy.value));
-        rb.velocity = velocityVector * (1 + distance * distanceSpeedModifier / 100);
+        rb.velocity = velocityVector;
     }
 }
