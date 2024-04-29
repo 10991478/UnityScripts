@@ -14,6 +14,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using System.IO;
 
 public class QUICK_TESTER_SCRIPT : MonoBehaviour
 {
@@ -33,7 +34,9 @@ public class QUICK_TESTER_SCRIPT : MonoBehaviour
     }
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Space)){
+            pressSpaceEvent.Invoke();
+        }
     }
 
     private IEnumerator TimerFunction()
@@ -48,5 +51,9 @@ public class QUICK_TESTER_SCRIPT : MonoBehaviour
     public void PrintMethod(string str)
     {
         Debug.Log(str);
+    }
+
+    public void DeletePlayerPreferences(){
+        PlayerPrefs.DeleteAll();
     }
 }

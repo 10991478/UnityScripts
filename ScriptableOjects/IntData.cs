@@ -68,11 +68,53 @@ public class IntData : ScriptableObject
         updateMinEvent.Invoke();
     }
 
+
+    /// <summary>
+    /// Runs atMinEvent, belowMinEvent, atMaxEvent, and aboveMaxEvent if respective existing bounds are met or exceeded
+    /// </summary>
     public void CheckBounds()
     {
         if (hasLowerBound && value == lowerBound) atMinEvent.Invoke();
         else if (hasLowerBound && value < lowerBound) belowMinEvent.Invoke();
         else if (hasUpperBound && value == upperBound) atMaxEvent.Invoke();
         else if (hasUpperBound && value > upperBound) aboveMaxEvent.Invoke();
+    }
+
+
+    /// <summary>
+    /// Evaluates whether a given value exceeds existing upper or lower bounds
+    /// </summary>
+    /// <param name="addVal"></param>
+    /// <returns> returns true if added value exceeds existing bounds, returns false if not </returns>
+    public bool AddedValueExceedsBounds(int addVal)
+    {
+        int sum = value + addVal;
+        if (hasLowerBound && sum < lowerBound) return true;
+        else if (hasUpperBound && sum > upperBound) return true;
+        else return false;
+    }
+
+    /// <summary>
+    /// Evaluates whether a given value exceeds existing lower bound
+    /// </summary>
+    /// <param name="addVal"></param>
+    /// <returns> returns true if added value exceeds existing lower bound, returns false if not </returns>
+    public bool AddedValueExceedsLowerBound(int addVal)
+    {
+        int sum = value + addVal;
+        if (hasLowerBound && sum < lowerBound) return true;
+        else return false;
+    }
+
+    /// <summary>
+    /// Evaluates whether a given value exceeds existing upper bound
+    /// </summary>
+    /// <param name="addVal"></param>
+    /// <returns> returns true if added value exceeds existing upper bound, returns false if not </returns>
+    public bool AddedValueExceedsUpperBound(int addVal)
+    {
+        int sum = value + addVal;
+        if (hasUpperBound && sum > upperBound) return true;
+        else return false;
     }
 }

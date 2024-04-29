@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class RockPaperScissorsIDMatch : MonoBehaviour
 {
-    [SerializeField] private ID selfID, downID, upID;
+    [SerializeField] private ID selfID, downID, upID, ultID;
 
     [SerializeField] private UnityEvent IDMatchEvent, IDLoseEvent, IDWinEvent;
     private void OnTriggerEnter(Collider other) {
@@ -16,7 +16,7 @@ public class RockPaperScissorsIDMatch : MonoBehaviour
             else if(tempObj.id == downID){
                 IDWinEvent.Invoke();
             }
-            else if(tempObj.id == upID){
+            else if(tempObj.id == upID || tempObj.id == ultID){
                 IDLoseEvent.Invoke();
             }
         }

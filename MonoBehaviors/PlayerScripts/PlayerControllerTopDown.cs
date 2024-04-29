@@ -9,7 +9,7 @@ public class PlayerControllerTopDown : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private FloatData speedMultiplier;
     [SerializeField] private Vector3Data spawnPoint;
-    private Vector3 targetPosition;
+    [SerializeField] private Rigidbody rb;
 
     void Update()
     {
@@ -36,11 +36,7 @@ public class PlayerControllerTopDown : MonoBehaviour
             horizontalInput = 1;
         }
 
-        targetPosition = transform.position;
-        targetPosition.x += horizontalInput * speed * speedMultiplier.value * Time.deltaTime;
-        targetPosition.z += verticalInput * speed * speedMultiplier.value * Time.deltaTime;
-
-        transform.position = targetPosition;
+        rb.velocity = Vector3.Normalize(new Vector3(horizontalInput, 0, verticalInput))*speed*speedMultiplier.value;
     }
 
     public void GoToSpawnPoint()

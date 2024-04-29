@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerGunControllerTopDown : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class PlayerGunControllerTopDown : MonoBehaviour
     [SerializeField] private IntData currentAmmoType;
     [SerializeField] private FloatData shotCooldown;
     [SerializeField] private GameObject[] ammoObjects;
+    [SerializeField] private UnityEvent shootEvent;
 
     void Awake()
     {
@@ -40,6 +42,6 @@ public class PlayerGunControllerTopDown : MonoBehaviour
     public void Shoot(float direction)
     {
         Instantiate(ammoObjects[currentAmmoType.value], transform.position, transform.rotation * Quaternion.Euler(0, 90 * (shootingDirection - 1), 0));
-
+        shootEvent.Invoke();
     }
 }
